@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://bird.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ground_rolling.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/ground-color.tres" type="Texture" id=3]
+[ext_resource path="res://background_parallax.tscn" type="PackedScene" id=4]
+[ext_resource path="res://camera.gd" type="Script" id=5]
+[ext_resource path="res://assets/background-color.tres" type="Texture" id=6]
+[ext_resource path="res://sprite_filler.gd" type="Script" id=7]
+[ext_resource path="res://controller.gd" type="Script" id=8]
+
+[node name="game" type="Node2D"]
+
+[node name="background-color" type="Sprite" parent="."]
+position = Vector2( -68, -90 )
+scale = Vector2( 136, 113 )
+texture = ExtResource( 6 )
+centered = false
+script = ExtResource( 7 )
+
+[node name="ground-color" type="Sprite" parent="."]
+position = Vector2( -68, 77 )
+scale = Vector2( 136, 13 )
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 7 )
+fill_direction = 1
+
+[node name="background_parallax" parent="." instance=ExtResource( 4 )]
+position = Vector2( -68, 23 )
+speed = 5.0
+
+[node name="ground_rolling" parent="." instance=ExtResource( 2 )]
+position = Vector2( -68, 66 )
+
+[node name="camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+process_priority = -1
+current = true
+script = ExtResource( 5 )
+
+[node name="bird" parent="." instance=ExtResource( 1 )]
+position = Vector2( -33, -43 )
+
+[node name="controller" type="Node2D" parent="."]
+script = ExtResource( 8 )
+bird_path = NodePath("../bird")

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/bird-animation.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://bird.gd" type="Script" id=2]
+[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[node name="bird" type="Area2D"]
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="smoothing" type="Node2D" parent="."]
+script = ExtResource( 3 )
+flags = 9
+
+[node name="bird_sprite" type="AnimatedSprite" parent="smoothing"]
+unique_name_in_owner = true
+frames = ExtResource( 1 )
+animation = "flapping"
+frame = 1
+playing = true
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
